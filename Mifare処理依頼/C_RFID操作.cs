@@ -85,6 +85,11 @@ namespace Mifare処理依頼
 					return true;
 				}
 			}
-		}
-	}
+            ////public C_RFID操作 R_RFID操作 = new C_RFID操作();
+        }
+
+        //////ynyn
+        ////public C_コントローラー R_コントローラー2 = new C_コントローラー();
+    
+    }
 }

@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace Mifare処理依頼
 {
+
 	public class C_マイフェア管理
 	{
 		/// <summary>
