@@ -1,0 +1,409 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nerva8100.Controller</name>
+    </assembly>
+    <members>
+        <member name="T:Nerva8100.Dpi">
+            <summary>
+            印刷の解像度(DPI)を表す
+            </summary>
+        </member>
+        <member name="F:Nerva8100.Dpi.Dpi600">
+            <summary>
+            600dpi
+            </summary>
+        </member>
+        <member name="F:Nerva8100.Dpi.Dpi300">
+            <summary>
+            300dpi
+            </summary>
+        </member>
+        <member name="F:Nerva8100.Dpi.Dpi200">
+            <summary>
+            200dpi
+            </summary>
+        </member>
+        <member name="F:Nerva8100.Dpi.Dpi150">
+            <summary>
+            150dpi
+            </summary>
+        </member>
+        <member name="F:Nerva8100.Dpi.Dpi100">
+            <summary>
+            100dpi
+            </summary>
+        </member>
+        <member name="T:Nerva8100.PrintEventArgs">
+            <summary>
+            印刷イベントの情報を表す
+            </summary>
+        </member>
+        <member name="F:Nerva8100.PrintEventArgs.Status">
+            <summary>
+            印刷の状態
+            </summary>
+        </member>
+        <member name="F:Nerva8100.PrintEventArgs.Progress">
+            <summary>
+            現在の印刷進捗状況。Totalと合わせて利用する。
+            </summary>
+        </member>
+        <member name="F:Nerva8100.PrintEventArgs.Total">
+            <summary>
+            全体の行数。Progressの値はこの値まで進むと印刷完了。
+            </summary>
+        </member>
+        <member name="T:Nerva8100.PrintStatus">
+            <summary>
+            印刷イベントの状態を表す
+            </summary>
+        </member>
+        <member name="F:Nerva8100.PrintStatus.Printing">
+            <summary>
+            印刷中の進捗状況を表す
+            </summary>
+        </member>
+        <member name="F:Nerva8100.PrintStatus.UserCanceled">
+            <summary>
+            ユーザーのキャンセルによって印刷が終了した
+            </summary>
+        </member>
+        <member name="F:Nerva8100.PrintStatus.Printed">
+            <summary>
+            印刷の完了によって印刷が終了した
+            </summary>
+        </member>
+        <member name="T:Nerva8100.LedEventArgs">
+            <summary>
+            LEDの点灯状況の変更を通知する
+            </summary>
+        </member>
+        <member name="F:Nerva8100.LedEventArgs.ErrorLed">
+            <summary>
+            エラーLEDの点灯状態
+            </summary>
+        </member>
+        <member name="F:Nerva8100.LedEventArgs.InkEmptyLed">
+            <summary>
+            インク切れLEDの点灯状態
+            </summary>
+        </member>
+        <member name="F:Nerva8100.LedEventArgs.PrintLed">
+            <summary>
+            印刷・パージLEDの点灯状態
+            </summary>
+        </member>
+        <member name="F:Nerva8100.LedEventArgs.PowerLed">
+            <summary>
+            電源LEDの点灯状態
+            </summary>
+        </member>
+        <member name="T:Nerva8100.ErrorEventArgs">
+            <summary>
+            プリンタで発生したエラーを表す
+            </summary>
+        </member>
+        <member name="F:Nerva8100.ErrorEventArgs.ErrorCode">
+            <summary>
+            エラーコード
+            </summary>
+        </member>
+        <member name="T:Nerva8100.Nerva8100Controller">
+            <summary>
+            プリンタのコントロールを行うクラス
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.Finalize">
+            <summary>
+            デストラクタ
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.Dispose">
+            <summary>
+            Dispose処理
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.#ctor">
+            <summary>
+            コンストラクタ
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.Open(System.Net.IPAddress)">
+            <summary>
+            プリンタと接続を行う。
+            既に接続済みの場合はInvalidOperationExceptionが発生する
+            </summary>
+            <param name="address"></param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.Close">
+            <summary>
+            プリンタとの接続を切断する。
+            接続していない場合に実行しても例外は発生しない。
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.ClearPrintData">
+            <summary>
+            プリンタの印刷データを破棄する。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.UploadPrintData(System.Int32,System.Int32,Nerva8100.Dpi,System.Drawing.Bitmap,System.Int32[]@)">
+            <summary>
+            印刷データをアップロードする
+            分割して印刷データを送る場合は、positionにx座標を指定する。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="positionX">印刷開始X位置</param>
+            <param name="positionY">印刷開始Y位置</param>
+            <param name="dpi">解像度</param>
+            <param name="bmp">印刷対象画像データ</param>
+            <param name="inks">ヘッド事の消費インク量</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetAd(System.Int32,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            カートリッジのAD値を取得する。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="ch">ADを取得するチャンネル</param>
+            <param name="cartridge1">AD値</param>
+            <param name="cartridge2">AD値</param>
+            <param name="cartridge3">AD値</param>
+            <param name="cartridge4">AD値</param>
+            <param name="cartridge5">AD値</param>
+            <param name="cartridge6">AD値</param>
+            <param name="cartridge7">AD値</param>
+            <param name="cartridge8">AD値</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.SetCartridge(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            カートリッジの設定を変更する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="index">設定対象のカートリッジインデックス。0始まり。</param>
+            <param name="enabled">有効無効。1:有効化、0:無効化、-1:変更しない。</param>
+            <param name="delay">遅延行。-1は設定変更しない。</param>
+            <param name="reverse">左右反転。1:左右反転、0:反転しない、-1:変更しない。</param>
+            <param name="upsideDown">上下反転。1:上下反転、0:反転しない、-1:変更しない。</param>
+            <param name="oddEvenOffset">奇数と偶数のギャップ値。-1:変更しない。</param>
+            <param name="vt">VT値。-1:変更しない。</param>
+            <param name="da">DA値。-1:変更しない。</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetCartridge(System.Int32,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            カートリッジの設定を取得する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="index">設定対象のカートリッジインデックス。0始まり。</param>
+            <param name="enabled">有効無効。1:有効化、0:無効化。</param>
+            <param name="delay">遅延行。</param>
+            <param name="reverse">左右反転。1:左右反転、0:反転しない。</param>
+            <param name="upsideDown">上下反転。1:上下反転、0:反転しない。</param>
+            <param name="oddEvenOffset">奇数と偶数のギャップ値。</param>
+            <param name="vt">VT値。</param>
+            <param name="da">DA値。</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetCartridgeIds(System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            カートリッジのIDを取得する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="id1"></param>
+            <param name="id2"></param>
+            <param name="id3"></param>
+            <param name="id4"></param>
+            <param name="id5"></param>
+            <param name="id6"></param>
+            <param name="id7"></param>
+            <param name="id8"></param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetLed(System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            LEDの現在の点灯状況を取得する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="errorLed">エラーLED</param>
+            <param name="inkLed">インク切れLED</param>
+            <param name="printLed">印刷中LED</param>
+            <param name="powerLed">電源LED</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.SetInkLed(System.Int32)">
+            <summary>
+            インク切れ状態を設定する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="led">1:点灯、0:消灯、-1:値を変更しない</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.SetPrintConfig(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            印刷の設定を行う
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="feedMode">0:タイマー、1:エンコーダー、-1:変更しない</param>
+            <param name="feedSpeed">紙送り速度。mm/min。-1:は変更しない。</param>
+            <param name="fire">fire幅。nsec。-1:は変更しない。</param>
+            <param name="pwFire">pwfire幅。µsec。-1:は変更しない。</param>
+            <param name="encoderPitch">エンコーダピッチ。pm。-1:は変更しない。</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetPrintConfig(System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            印刷の設定を取得する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="feedMode">0:タイマー、1:エンコーダー</param>
+            <param name="feedSpeed">紙送り速度。mm/min。</param>
+            <param name="fire">fire幅。nsec。</param>
+            <param name="pwFire">pwfire幅。µsec。</param>
+            <param name="encoderPitch">エンコーダピッチ。pm。</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.SetNetwork(System.Net.IPAddress,System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            ネットワーク設定
+            設定値は再起動後有効となります。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="ip">IPアドレス</param>
+            <param name="mask">サブネットマスク</param>
+            <param name="gateway">デフォルトゲートウェイ</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetNetwork(System.Net.IPAddress@,System.Net.IPAddress@,System.Net.IPAddress@)">
+            <summary>
+            現在のネットワーク設定を取得する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="ip">IPアドレス</param>
+            <param name="mask">サブネットマスク</param>
+            <param name="gateway">デフォルトゲートウェイ</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.Reboot(System.Int32)">
+            <summary>
+            再起動。sec秒待ってから再起動する。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="sec">待機秒。</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.SetMainPower(System.Int32)">
+            <summary>
+            電源設定を行う
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="on">0:OFF、1:ON</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetMainPower(System.Int32@)">
+            <summary>
+            現在の電源設定を取得する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="on">0:OFF、1:ON</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.DoPurge(System.Int32)">
+            <summary>
+            パージ
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="line">パージ行数</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.StartPrint(System.Int32)">
+            <summary>
+            印刷指示。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="sensor">センサーの利用。1:利用する、0:利用しない</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.CancelPrint">
+            <summary>
+            印刷キャンセル
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetVersion(System.String@,System.String@,System.String@)">
+            <summary>
+            バージョン情報を取得する
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="name">システム名</param>
+            <param name="major">メジャー番号</param>
+            <param name="minor">マイナー番号</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.OpenSerialPort">
+            <summary>
+            RFIDのICと通信を行うプリンタ装置のポートを開く。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.CloseSerialPort">
+            <summary>
+            RFIDのICと通信を行うプリンタ装置のポートを閉じる。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.InitRfid">
+            <summary>
+            RFIDのICの初期化を行う。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.GetRfidUID(System.Int32,System.Byte[]@)">
+            <summary>
+            RFIDのタグIDを取得する。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="ch">タグIDを読み込むチャンネル。0～7を指定する。</param>
+            <param name="UID">読み取ったタグID。</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.ReadRfidData(System.Int32,System.Int32,System.Int32,System.Byte[],System.Byte[]@,System.Byte[]@)">
+            <summary>
+            RFIDのタグ内部の情報を読み込む。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="ch">タグ内部の情報を読み込むチャンネル。0～7を指定する。</param>
+            <param name="sector">読み込み先のセクター番号を指定する。</param>
+            <param name="block">読み込み先のブロック番号を指定する。</param>
+            <param name="UID">読み込み先のセクターのキーを指定する。</param>
+            <param name="UID">読み込んだデータ。</param>
+            <param name="UID">読み込んだタグのタグID。</param>
+        </member>
+        <member name="M:Nerva8100.Nerva8100Controller.WriteRfidData(System.Int32,System.Int32,System.Int32,System.Byte[],System.Byte[],System.Byte[]@)">
+            <summary>
+            RFIDのタグ内部の情報を書き込む。
+            プリンタと接続していない場合はInvalidOperationException例外が発生する。
+            </summary>
+            <param name="ch">タグ内部の情報を書き込むチャンネル。0～7を指定する。</param>
+            <param name="sector">書き込み先のセクター番号を指定する。</param>
+            <param name="block">書き込み先のブロック番号を指定する。</param>
+            <param name="UID">書き込み先のセクターのキーを指定する。</param>
+            <param name="UID">書き込むデータ。</param>
+            <param name="UID">書き込んだタグのタグID。</param>
+        </member>
+        <member name="P:Nerva8100.Nerva8100Controller.IsDisposed">
+            <summary>
+            Disposed済みか
+            </summary>
+        </member>
+        <member name="E:Nerva8100.Nerva8100Controller.BeginPrint">
+            <summary>
+            印刷開始時に呼び出されるイベント
+            </summary>
+        </member>
+        <member name="E:Nerva8100.Nerva8100Controller.EndPrint">
+            <summary>
+            印刷の終了時（完了・キャンセルの両方）に呼び出されるイベント
+            </summary>
+        </member>
+        <member name="E:Nerva8100.Nerva8100Controller.Printing">
+            <summary>
+            印刷の進捗を状況を表すイベント
+            </summary>
+        </member>
+        <member name="E:Nerva8100.Nerva8100Controller.ChangeLed">
+            <summary>
+            LEDの点灯状況に変更があった場合に呼び出されるイベント
+            </summary>
+        </member>
+        <member name="P:Nerva8100.Nerva8100Controller.IsOpend">
+            <summary>
+            プリンタとの接続状況を表す
+            </summary>
+        </member>
+    </members>
+</doc>

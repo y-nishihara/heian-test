@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Mifare処理依頼.C_マイフェア管理">
+    <Position X="0.5" Y="0.5" Width="5.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ" Collapsed="true">
+        <Compartments>
+          <Compartment Name="Nested Types" Collapsed="false" />
+        </Compartments>
+        <NestedTypes>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.B_データ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_セクター_ウェアレベリング">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ブロック_システムカウンターテータ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ブロック_システムファイルデータ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_セクター_システム">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_セクタートレーラー設定">
+            <Compartments>
+              <Compartment Name="Nested Types" Collapsed="false" />
+            </Compartments>
+            <NestedTypes>
+              <Enum Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_セクタートレーラー設定.en_セクター識別">
+                <TypeIdentifier>
+                  <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+                </TypeIdentifier>
+              </Enum>
+              <Enum Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_セクタートレーラー設定.en_アクセスビット状態">
+                <TypeIdentifier>
+                  <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+                </TypeIdentifier>
+              </Enum>
+            </NestedTypes>
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_リードオンリーデータ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ブロック_システムセクタートレーラー">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_システムデータ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ブロック_リードオンリーデータ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.B_ブロック">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ウェアレベリングデータ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Struct Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.S_ブロックアドレス">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Struct>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ブロック_ウェアレベリングデータ">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_セクター_未使用">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ブロック_ウェアレベリングセクタートレーラー">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_セクター_リードオンリー">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.B_セクター">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_マイフェア管理.C_マイフェアデータ.C_ブロック_リードオンリーセクタートレーラー">
+            <TypeIdentifier>
+              <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+        </NestedTypes>
+        <TypeIdentifier>
+          <NewMemberFileName>C_マイフェア管理.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAUCIACAAAAAAAAIAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>C_マイフェア管理.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mifare処理依頼.C_Nerva8100ホスト">
+    <Position X="7" Y="0.5" Width="6.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Mifare処理依頼.C_Nerva8100ホスト.C_カートリッジホルダー" Collapsed="true">
+        <Compartments>
+          <Compartment Name="Nested Types" Collapsed="false" />
+        </Compartments>
+        <NestedTypes>
+          <Class Name="Mifare処理依頼.C_Nerva8100ホスト.C_カートリッジホルダー.C_カートリッジ情報">
+            <TypeIdentifier>
+              <NewMemberFileName>C_Nerva8100ホスト.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+          <Class Name="Mifare処理依頼.C_Nerva8100ホスト.C_カートリッジホルダー.C_インク使用量">
+            <TypeIdentifier>
+              <NewMemberFileName>C_Nerva8100ホスト.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+        </NestedTypes>
+        <TypeIdentifier>
+          <NewMemberFileName>C_Nerva8100ホスト.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Mifare処理依頼.C_Nerva8100ホスト.C_コントローラー">
+        <Compartments>
+          <Compartment Name="Nested Types" Collapsed="false" />
+        </Compartments>
+        <NestedTypes>
+          <Class Name="Mifare処理依頼.C_Nerva8100ホスト.C_コントローラー.C_RFID操作">
+            <TypeIdentifier>
+              <NewMemberFileName>C_RFID操作.cs</NewMemberFileName>
+            </TypeIdentifier>
+          </Class>
+        </NestedTypes>
+        <TypeIdentifier>
+          <NewMemberFileName>C_Nerva8100ホスト.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>C_Nerva8100ホスト.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Meiryo UI" Size="9" />
+</ClassDiagram>
