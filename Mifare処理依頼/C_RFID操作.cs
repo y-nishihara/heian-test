@@ -12,14 +12,12 @@ namespace Mifare処理依頼
 		{
 			public class C_RFID操作
 			{
-				public C_RFID操作(Nerva8100.Nerva8100Controller AR_コントローラーライブラリー, int AV_ch)
+				public C_RFID操作(Nerva8100.Nerva8100Controller AR_コントローラーライブラリー)
 				{
 					this.R_コントローラーライブラリー = AR_コントローラーライブラリー;
-					this.V_ch = AV_ch;
 				}
 
 				Nerva8100.Nerva8100Controller R_コントローラーライブラリー;
-				int V_ch;
 				byte[] V_key = C_マイフェア管理.C_マイフェアデータ.SR_KeyA;
 				
 
@@ -31,7 +29,7 @@ namespace Mifare処理依頼
 					return LR_システムファイルデータブロック;
 				}
 
-				public List<byte[]> F_全データ取得(Action<float> AR_進捗報告動作)
+				public List<byte[]> F_全データ取得(int A_ch,Action<float> AR_進捗報告動作)
 				{
 					List<byte[]> LR_データリスト= new List<byte[]>();
 
@@ -41,8 +39,11 @@ namespace Mifare処理依頼
 					{
 						for (int fe_ブロックNo = 0; fe_ブロックNo < 4; fe_ブロックNo++)
 						{
-							byte[] LR_データ;
-							this.R_コントローラーライブラリー.ReadRfidData(this.V_ch,fe_セクターNo,fe_ブロックNo,V_key,out LR_データ,out LR_UID);
+							//byte[] LR_データ;
+							//this.R_コントローラーライブラリー.ReadRfidData(A_ch,fe_セクターNo,fe_ブロックNo,V_key,out LR_データ,out LR_UID);
+
+							byte[] LR_データ = new byte[16];
+							LR_UID = BitConverter.GetBytes((uint)A_ch);
 							LR_データリスト.Add(LR_データ);
 
 							if (AR_進捗報告動作 != null)
@@ -60,36 +61,31 @@ namespace Mifare処理依頼
 					return LR_データリスト;
 				}
 
-				public uint F_UID取得()
+				public uint F_UID取得(int A_ch)
 				{
 					return 0;
 				}
 
-				public bool F_データ書込み(C_マイフェア管理.C_マイフェアデータ.B_ブロック AR_ブロック)
+				public bool F_データ書込み(int A_ch,List<C_マイフェア管理.C_マイフェアデータ.B_ブロック> AR_書込みブロックリスト)
 				{
 					return true;
 				}
 
-				public bool F_データ照合(C_マイフェア管理.C_マイフェアデータ.B_ブロック AR_ブロック)
+				public bool F_データ照合(int A_ch,C_マイフェア管理.C_マイフェアデータ.B_ブロック AR_ブロック)
 				{
 					return true;
 				}
 
-				public bool F_システムファイルデータ書込み(C_マイフェア管理.C_マイフェアデータ.C_ブロック_システムファイルデータ AR_システムファイルデータブロック)
+				public bool F_システムファイルデータ書込み(int A_ch,C_マイフェア管理.C_マイフェアデータ.C_ブロック_システムファイルデータ AR_システムファイルデータブロック)
 				{
 					return true;
 				}
 
-				public bool F_初期化(C_マイフェア管理.C_マイフェアデータ AR_データ)
+				public bool F_初期化(int A_ch,C_マイフェア管理.C_マイフェアデータ AR_データ)
 				{
 					return true;
 				}
 			}
-            ////public C_RFID操作 R_RFID操作 = new C_RFID操作();
-        }
-
-        //////ynyn
-        ////public C_コントローラー R_コントローラー2 = new C_コントローラー();
-    
-    }
+		}
+	}
 }

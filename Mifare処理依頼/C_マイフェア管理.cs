@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 namespace Mifare処理依頼
 {
-
 	public class C_マイフェア管理
 	{
 		/// <summary>
@@ -183,6 +182,7 @@ namespace Mifare処理依頼
 		/// <param name="AR_Mifareタグデータ">Mifareタグに記録されている全byte[]データです、通しブロック番号0から順に全ブロックのデータのリスを指定します</param>
 		public bool F_再構築(List<byte[]> AR_全Mifareタグデータ)
 		{
+			this.R_マイフェアデータ = new C_マイフェアデータ();
 			//全てのデータから管理クラスを再構築します
 			return true;
 		}
@@ -198,13 +198,21 @@ namespace Mifare処理依頼
 		/// <returns></returns>
 		public List<C_マイフェアデータ.B_ブロック> F_データ書込み(List<C_マイフェアデータ.B_データ> AR_書込みデータリスト)
 		{
+			foreach (var fe in AR_書込みデータリスト)
+			{
+				fe.V_書込み済み = true;
+			}
 			return new List<C_マイフェアデータ.B_ブロック>();
 		}
 
 
-		public C_マイフェアデータ.B_ブロック F_データ読込み(ref C_マイフェアデータ.B_データ AR_読込みデータ)
+		public C_マイフェアデータ.B_ブロック F_データ読込み(C_マイフェアデータ.B_データ AR_読込みデータ)
 		{
 			return new C_マイフェアデータ.C_ブロック_ウェアレベリングデータ();
+		}
+
+		public void F_データ読込み(List<C_マイフェアデータ.B_データ> AR_読込みデータリスト)
+		{
 		}
 
 		public uint F_UID取得()
@@ -341,6 +349,7 @@ namespace Mifare処理依頼
 			{
 				public byte V_データID;
 				public S_ブロックアドレス V_最終書き込みアドレス = new S_ブロックアドレス();
+				public bool V_書込み済み = false;
 			}
 
 			public class C_リードオンリーデータ : B_データ
