@@ -70,7 +70,7 @@ namespace Mifare処理依頼
 		}
 
 		C_Nerva8100ホスト R_Nerva8100ホスト = new C_Nerva8100ホスト();
-		C_マイフェア管理 R_マイフェア管理 = new C_マイフェア管理("Nerva".ToCharArray());
+		C_マイフェア管理 R_マイフェア管理 = new C_マイフェア管理("Nerva");
 
 		bool V_接続 = false;
 		private void button_接続_Click(object sender, EventArgs e)
@@ -139,7 +139,7 @@ namespace Mifare処理依頼
 			this.button_システム_アプリ起動.Enabled = false;
 			this.button_システム_アプリ終了.Enabled = true;
 			this.button_システム_印字.Enabled = true;
-			this.R_Nerva8100ホスト.R_コントローラー.F_システムファイル照合();
+			this.R_Nerva8100ホスト.R_コントローラー.F_管理ファイル照合();
 		}
 
 		private void button_システム_アプリ終了_Click(object sender, EventArgs e)
@@ -170,6 +170,24 @@ namespace Mifare処理依頼
 		#endregion
 
 
+
+		private void button_操作_データ照合_Click(object sender, EventArgs e)
+		{
+			Nerva8100.Nerva8100Controller R_コントローラーライブラリー = new Nerva8100.Nerva8100Controller();
+			C_Nerva8100ホスト.C_コントローラー.C_RFID操作 R_RFID操作 = new C_Nerva8100ホスト.C_コントローラー.C_RFID操作(R_コントローラーライブラリー);
+			//↓抽象クラスの為、エラーとなります。
+			//※インスタンス化し、代入するのは継承クラスになります
+			C_マイフェア管理.C_マイフェアデータ.C_ブロック_ウェアレベリングデータ R_ブロック = new C_マイフェア管理.C_マイフェアデータ.C_ブロック_ウェアレベリングデータ();
+			bool b_ret = false;
+
+			//・・・
+
+			b_ret = R_RFID操作.F_データ照合(0, R_ブロック);
+			//このメソッド内部ではC_マイフェア管理.C_マイフェアデータ.B_ブロックとして扱われます
+			//アドレスと16バイトのデータはその状態でも扱えます
+			//また、型を判別するとC_マイフェア管理.C_マイフェアデータ.C_ブロック_ウェアレベリングデータが出てきますので
+			//キャストしてC_マイフェア管理.C_マイフェアデータ.C_ブロック_ウェアレベリングデータといて扱うことも出来ます
+		}
 
 	}
 }

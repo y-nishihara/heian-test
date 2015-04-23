@@ -267,7 +267,7 @@ namespace Mifare処理依頼
 				public C_パルスウォーミング累計時間 R_パルスウォーミング累計時間 = new C_パルスウォーミング累計時間();
 				public C_インク無効日時 R_インク無効日時 = new C_インク無効日時();
 
-				public C_マイフェア管理 R_マイフェア管理 = new C_マイフェア管理("NERVA".ToCharArray());
+				public C_マイフェア管理 R_マイフェア管理 = new C_マイフェア管理("NERVA");
 
 
 			}
@@ -294,11 +294,11 @@ namespace Mifare処理依頼
 			}
 
 
-			public void F_システムファイル照合()
+			public void F_管理ファイル照合()
 			{
 				for (int i = 0; i < this.R_カートリッジホルダーリスト.Length; i++)
 				{
-					if (this.R_カートリッジホルダーリスト[i].R_マイフェア管理.F_システムファイル読込み(this.R_RFID操作.F_システムファイルデータ取得()) == false)
+					if (this.R_カートリッジホルダーリスト[i].R_マイフェア管理.F_管理ファイル読込み(this.R_RFID操作.F_管理ファイルデータ取得(i)) == false)
 					{
 						if (this.F_マージ(i,this.R_カートリッジホルダーリスト[i].R_インク処理中) == false)
 						{
@@ -334,11 +334,11 @@ namespace Mifare処理依頼
 				}
 			}
 
-			public void F_システムファイル更新()
+			public void F_管理ファイル更新()
 			{
 				for (int i = 0; i < this.R_カートリッジホルダーリスト.Length; i++)
 				{
-					this.R_RFID操作.F_システムファイルデータ書込み(i,this.R_カートリッジホルダーリスト[i].R_マイフェア管理.F_システムファイル保存());
+					this.R_RFID操作.F_データ書込み(i, new List<C_マイフェア管理.C_マイフェアデータ.B_ブロック>() { this.R_カートリッジホルダーリスト[i].R_マイフェア管理.F_管理ファイル保存() });
 				}
 			}
 
@@ -387,7 +387,7 @@ namespace Mifare処理依頼
 					List<C_マイフェア管理.C_マイフェアデータ.B_データ> LR_書込みデータリスト = new List<C_マイフェア管理.C_マイフェアデータ.B_データ>();
 					LR_書込みデータリスト.Add(this.R_カートリッジホルダーリスト[i].R_インク初回使用から最終使用までの間隔);
 					this.R_RFID操作.F_データ書込み(i,this.R_カートリッジホルダーリスト[i].R_マイフェア管理.F_データ書込み(LR_書込みデータリスト));
-					this.F_システムファイル更新();
+					this.F_管理ファイル更新();
 				}
 			}
 
