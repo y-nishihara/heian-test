@@ -189,5 +189,143 @@ namespace Mifare処理依頼
 			//キャストしてC_マイフェア管理.C_マイフェアデータ.C_ブロック_ウェアレベリングデータといて扱うことも出来ます
 		}
 
+
+        #region フォームイベント処理(管理クラス)
+
+        private void button_管理_UID取得_Click(object sender, EventArgs e)
+        {
+            button_管理_UID取得.Text = R_マイフェア管理.F_UID取得().ToString();
+        }
+
+        private void button_管理_システムファイル読込み_Click(object sender, EventArgs e)
+        {
+            bool b_ret = false;
+            C_マイフェア管理.C_マイフェアデータ.C_ブロック_管理ファイルデータ V_管理ファイルデータ = new C_マイフェア管理.C_マイフェアデータ.C_ブロック_管理ファイルデータ();
+
+            b_ret = R_マイフェア管理.F_管理ファイル読込み(V_管理ファイルデータ);
+            textBox_管理_CheckMD5.Text = V_管理ファイルデータ.V_Check_MD5.ToString();
+        }
+
+        private void button_管理_システムファイル保存_Click(object sender, EventArgs e)
+        {
+            C_マイフェア管理.C_マイフェアデータ.C_ブロック_管理ファイルデータ V_ブロック_システムファイルデータ = new C_マイフェア管理.C_マイフェアデータ.C_ブロック_管理ファイルデータ();
+
+            R_マイフェア管理.F_管理ファイル保存();
+        }
+
+        private void button_管理_データ読込み_Click(object sender, EventArgs e)
+        {
+            C_マイフェア管理.C_マイフェアデータ.C_リードオンリーデータ R_データ = new C_マイフェア管理.C_マイフェアデータ.C_リードオンリーデータ();
+            R_マイフェア管理.F_データ読込み(R_データ);
+        }
+
+        private void button_管理_データ書込み_Click(object sender, EventArgs e)
+        {
+            //ynyn
+            //List<C_マイフェア管理.C_マイフェアデータ.C_ブロック_リードオンリーセクタートレーラー> R_ブロックリスト = new List<C_マイフェア管理.C_マイフェアデータ.C_ブロック_リードオンリーセクタートレーラー>();
+            //List<C_マイフェア管理.C_マイフェアデータ.C_リードオンリーデータ> R_データリスト = new List<C_マイフェア管理.C_マイフェアデータ.C_リードオンリーデータ>();
+            //C_マイフェア管理.C_マイフェアデータ.C_リードオンリーデータ R_データ = new C_マイフェア管理.C_マイフェアデータ.C_リードオンリーデータ();
+            //R_マイフェア管理.F_データ書込み(R_データリスト);
+            List<C_マイフェア管理.C_マイフェアデータ.B_ブロック> R_ブロックリスト = new List<C_マイフェア管理.C_マイフェアデータ.B_ブロック>();
+            List<C_マイフェア管理.C_マイフェアデータ.B_データ> R_データリスト = new List<C_マイフェア管理.C_マイフェアデータ.B_データ>();
+            //R_データリスト.Add();
+            R_ブロックリスト = R_マイフェア管理.F_データ書込み(R_データリスト);
+        
+        }
+
+        private void button_管理_初期化_Click(object sender, EventArgs e)
+        {
+            int V_総セクター数;
+            int V_ウェアレベリングセクター数;
+
+            try
+            {
+                V_総セクター数 = int.Parse(textBox_管理_総セクター数.Text);
+                V_ウェアレベリングセクター数 = int.Parse(textBox_管理_ウェアレベリングセクター数.Text);
+                R_マイフェア管理.F_初期化(V_総セクター数, V_ウェアレベリングセクター数);
+            }
+            catch (System.Exception ex)
+            {
+                // 失敗したとき
+                System.Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+            }
+        }
+
+        private void button_管理_再構築_Click(object sender, EventArgs e)
+        {
+            //ynyn
+            List<byte[]> R_全Mifareタグデータ = new List<byte[]>();
+            R_マイフェア管理.F_再構築(R_全Mifareタグデータ);
+        }
+
+        #endregion フォームイベント処理(管理クラス)
+
+        #region フォームイベント処理(操作クラス)
+
+        private void button_操作_UID取得_Click(object sender, EventArgs e)
+        {
+            Nerva8100.Nerva8100Controller R_コントローラーライブラリー = new Nerva8100.Nerva8100Controller();
+            C_Nerva8100ホスト.C_コントローラー.C_RFID操作 R_RFID操作 = new C_Nerva8100ホスト.C_コントローラー.C_RFID操作(R_コントローラーライブラリー);
+
+            button_操作_UID取得.Text = R_RFID操作.F_UID取得(0).ToString();
+        }
+
+        private void button_操作_システムファイルデータ取得_Click(object sender, EventArgs e)
+        {
+            Nerva8100.Nerva8100Controller R_コントローラーライブラリー = new Nerva8100.Nerva8100Controller();
+            C_Nerva8100ホスト.C_コントローラー.C_RFID操作 R_RFID操作 = new C_Nerva8100ホスト.C_コントローラー.C_RFID操作(R_コントローラーライブラリー);
+            C_マイフェア管理.C_マイフェアデータ.C_ブロック_管理ファイルデータ R_管理ファイルデータブロック = new C_マイフェア管理.C_マイフェアデータ.C_ブロック_管理ファイルデータ();
+
+            R_管理ファイルデータブロック = R_RFID操作.F_管理ファイルデータ取得(0);
+        }
+
+        private void button_操作_システムファイルデータ書込み_Click(object sender, EventArgs e)
+        {
+            Nerva8100.Nerva8100Controller R_コントローラーライブラリー = new Nerva8100.Nerva8100Controller();
+            C_Nerva8100ホスト.C_コントローラー.C_RFID操作 R_RFID操作 = new C_Nerva8100ホスト.C_コントローラー.C_RFID操作(R_コントローラーライブラリー);
+            List<C_マイフェア管理.C_マイフェアデータ.B_ブロック> R_書込みブロックリスト = new List<C_マイフェア管理.C_マイフェアデータ.B_ブロック>();
+            bool b_ret = false;
+
+            b_ret = R_RFID操作.F_データ書込み(0, R_書込みブロックリスト);
+        }
+
+        private void button_操作_データ書込み_Click(object sender, EventArgs e)
+        {
+            Nerva8100.Nerva8100Controller R_コントローラーライブラリー = new Nerva8100.Nerva8100Controller();
+            C_Nerva8100ホスト.C_コントローラー.C_RFID操作 R_RFID操作 = new C_Nerva8100ホスト.C_コントローラー.C_RFID操作(R_コントローラーライブラリー);
+            List<C_マイフェア管理.C_マイフェアデータ.B_ブロック> R_書込みブロックリスト = new List<C_マイフェア管理.C_マイフェアデータ.B_ブロック>();
+            bool b_ret = false;
+
+            b_ret = R_RFID操作.F_データ書込み(0, R_書込みブロックリスト);
+        }
+
+        private void button_操作_初期化_Click(object sender, EventArgs e)
+        {
+            Nerva8100.Nerva8100Controller R_コントローラーライブラリー = new Nerva8100.Nerva8100Controller();
+            C_Nerva8100ホスト.C_コントローラー.C_RFID操作 R_RFID操作 = new C_Nerva8100ホスト.C_コントローラー.C_RFID操作(R_コントローラーライブラリー);
+            C_マイフェア管理.C_マイフェアデータ R_データ = new C_マイフェア管理.C_マイフェアデータ();
+            Action<float> R_進捗報告動作 = null;
+            bool b_ret = false;
+
+            b_ret = R_RFID操作.F_初期化(0, R_データ, R_進捗報告動作);
+        }
+
+        private void button_操作_全データ取得_Click(object sender, EventArgs e)
+        {
+            Nerva8100.Nerva8100Controller R_コントローラーライブラリー = new Nerva8100.Nerva8100Controller();
+            C_Nerva8100ホスト.C_コントローラー.C_RFID操作 R_RFID操作 = new C_Nerva8100ホスト.C_コントローラー.C_RFID操作(R_コントローラーライブラリー);
+            Action<float> R_進捗報告動作 = null;
+            List<byte[]> byte_data = new List<byte[]>();
+
+            byte_data = R_RFID操作.F_全データ取得(0, R_進捗報告動作);
+        }
+
+        #endregion フォームイベント処理(操作クラス)
+
+
 	}
 }
